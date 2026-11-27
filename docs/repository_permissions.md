@@ -19,7 +19,6 @@ administrator bypass would not isolate the leader.
 | Required CI - no bypass (28262951) | Up-to-date infrastructure check from GitHub Actions | None |
 | Pull requests and branch safety - no bypass (28262952) | PR required, resolved conversations, no force push/deletion | None |
 | Leader approval - leader PR-only bypass (28262953) | One approval, code-owner approval, dismiss stale reviews | Only the project leader's individual account, for PRs only |
-| Ownership activation guard - leader merges only (28263045) | Temporarily restrict branch updates until CODEOWNERS is active | Only the leader, for PRs only |
 
 The leader can create and merge their own PRs without another developer's approval,
 review developer PRs and manage repository settings. Required CI still applies.
@@ -37,13 +36,14 @@ approval for unattributed changes; it cannot reintroduce another-reviewer requir
 
 ## CODEOWNERS activation dependency
 
-The proposed .github/CODEOWNERS assigns every path, including itself, to the project
+The .github/CODEOWNERS file assigns every path, including itself, to the project
 leader. GitHub evaluates CODEOWNERS from the PR's base branch. At configuration time,
-neither main nor develop contained that file. It is proposed in bootstrap PR 6 and
-is not active on either base until merged there. The bootstrap PR remains unmerged
-pending explicit project leader authorization.
+neither main nor develop contained that file. The project leader explicitly authorized
+merging bootstrap PR 6 into develop and promoting the infrastructure through a PR to
+main after local validation. Ownership becomes active separately on each base when
+the file reaches that branch.
 
-Until activation, the temporary update guard prevents everyone except the leader from
+During activation, the temporary update guard (28263045) prevents everyone except the leader from
 merging to the protected branches. This deliberately prevents another developer's
 approval from substituting for leader approval while CODEOWNERS is absent. After the
 ownership file reaches each base branch and its validity is verified, remove that
@@ -53,7 +53,8 @@ guard early or treat a CODEOWNERS file on a feature branch as active enforcement
 
 The ordinary PR review summary may still say REVIEW_REQUIRED because it reports the
 rule's default requirement; the individual bypass is scoped to the review ruleset.
-No test merge or unauthorized bootstrap merge was performed to demonstrate bypass.
+Only the explicitly authorized bootstrap and promotion merges may be used to verify
+the review exception. CI and branch-safety rules must still pass for those merges.
 
 ## Organization visibility limitation
 
