@@ -13,6 +13,12 @@
 - Add relevant tests and run pytest, Ruff lint, and Ruff format checks before completion.
 - Avoid unrelated changes and unnecessary dependencies. Keep fakes under tests only.
 - Never commit private data, embeddings, results, weights, credentials, or personal paths.
-- Use Conventional Commits and pull requests targeting develop; never bypass approvals.
+- Use Conventional Commits and feature pull requests targeting develop. Developers
+  require project leader approval and may not bypass reviews or push directly to
+  protected branches. The leader has an individual, pull-request-only review bypass
+  and may merge their own PRs without another developer's approval. This exception
+  never bypasses required CI or branch safety. Do not use an administrator-wide bypass.
+- Follow docs/repository_permissions.md for CODEOWNERS activation and the temporary
+  leader-only merge guard. Do not merge the bootstrap PR without explicit leader authorization.
 - Do not implement facial recognition or persistent cross-video identity databases.
 - Report incomplete functionality and failed validation honestly.

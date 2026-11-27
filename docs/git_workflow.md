@@ -12,7 +12,8 @@ reconciliation of incompatible edits.
 main holds stable releases; develop integrates reviewed work. chore/bootstrap contains
 Phase 0. Feature PRs target develop. Use Conventional Commits (`feat:`, `fix:`, `test:`,
 `docs:`, `chore:`) and English descriptions. Never commit features directly to protected
-branches or bypass required approvals.
+branches. Developers cannot bypass required approvals. The leader's explicitly
+configured review-only exception never bypasses CI or other branch safety rules.
 
 ```powershell
 git clone https://github.com/Vexonova-ai/DiDban-Sanat-Analysis-Humans.git
@@ -65,10 +66,14 @@ test, stage resolved files and commit the merge. Ask the owner if semantics are 
 earlier work. Do not use destructive resets or force pushes as shortcuts.
 
 Link the issue, explain validation, request review, resolve conversations and await
-the actual infrastructure check. At least one review approval is required. Breaking
-contracts need a dedicated PR and project leader approval. Release PRs target main.
+the actual infrastructure check. Developer PRs require project leader code-owner
+approval. The leader can merge their own PRs without approval from another developer
+using the individual pull-request-only review bypass. Breaking contracts need a
+dedicated PR and project leader approval. Release PRs target main.
 The bootstrap PR must not be merged without project leader approval.
 
-Both main and develop require one approval, dismissal of stale reviews, resolved
-review conversations and an up-to-date passing infrastructure check. Administrators
-are subject to protection too. Force pushes and branch deletion are disabled.
+Both main and develop require PRs, resolved conversations and an up-to-date passing
+infrastructure check for everyone. A separate review ruleset requires one approval,
+code-owner review and dismissal of stale reviews, with a bypass for the leader alone
+in pull-request mode. Other administrators have no bypass. Force pushes and deletion
+remain disabled. See [the actual configuration and activation status](repository_permissions.md).

@@ -23,9 +23,11 @@ Initial validation performed on 2026-11-28. This measures infrastructure only.
 - GitHub Actions run 46068057166 completed successfully for bootstrap commit 701eedc.
   The actual required job is named infrastructure. Downloading the full log archive
   timed out locally; the run and check APIs confirmed success independently.
-- main and develop now require PRs, one approval, dismissal of stale reviews, resolved
+- Before the requested permissions correction, main and develop required PRs, one approval,
+  dismissal of stale reviews, resolved
   conversations and an up-to-date infrastructure check. Protection includes admins;
-  force pushes and deletion are disabled. The PR remains open with REVIEW_REQUIRED.
+  force pushes and deletion were disabled. This review policy is superseded by
+  [the corrected leader-specific policy](repository_permissions.md).
 - Synthetic torchvision native NMS operations succeeded on CPU and CUDA. These check
   binary compatibility only; they do not load a detector or test detection accuracy.
 
