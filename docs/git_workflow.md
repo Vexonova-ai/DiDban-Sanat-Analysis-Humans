@@ -25,6 +25,16 @@ After bootstrap approval and merge, follow [uv setup](development_guide.md). Cre
 only your assigned branch. The reserved branches are feature/detection,
 feature/tracking-reid, feature/fashion, feature/pipeline and feature/storage-evaluation.
 
+Run exactly one branch command after the common clone, develop update and uv setup:
+
+| Role | Command | Issue |
+| --- | --- | --- |
+| 01 - Detection | `git switch -c feature/detection` | #1 |
+| 02 - Tracking, ReID and Buffer | `git switch -c feature/tracking-reid` | #2 |
+| 03 - Fashion | `git switch -c feature/fashion` | #3 |
+| 04 - Integration | `git switch -c feature/pipeline` | #4 |
+| 05 - Storage and Evaluation | `git switch -c feature/storage-evaluation` | #5 |
+
 ```powershell
 git switch -c feature/detection
 git status
@@ -58,3 +68,7 @@ Link the issue, explain validation, request review, resolve conversations and aw
 the actual infrastructure check. At least one review approval is required. Breaking
 contracts need a dedicated PR and project leader approval. Release PRs target main.
 The bootstrap PR must not be merged without project leader approval.
+
+Both main and develop require one approval, dismissal of stale reviews, resolved
+review conversations and an up-to-date passing infrastructure check. Administrators
+are subject to protection too. Force pushes and branch deletion are disabled.
