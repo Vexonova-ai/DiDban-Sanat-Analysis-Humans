@@ -15,7 +15,7 @@ Initial validation performed on 2026-11-28. This measures infrastructure only.
 - A separate ignored .venv-ci environment synchronized with `uv sync --locked`.
 - Infrastructure tests: 21 passed. Shared core: 58 statements, 100% coverage.
 - Ruff lint and formatting passed.
-- Role issues 1-5 are open and unassigned, all To Do. Bootstrap PR 6 is In Review.
+- Role issues 1-5 are open and unassigned, all To Do. Bootstrap work is tracked in PR 6.
 - Dedicated project 2 uses a board layout with To Do, In Progress, In Review and Done. GitHub
   rejected public project visibility with `Viewer not authorized to change project
   visibility (updateProjectV2)`. The project remains private; the repository is public.
@@ -31,8 +31,17 @@ Initial validation performed on 2026-11-28. This measures infrastructure only.
 - Synthetic torchvision native NMS operations succeeded on CPU and CUDA. These check
   binary compatibility only; they do not load a detector or test detection accuracy.
 
-Full inference dependency synchronization and final native-operation checks are
-recorded in the bootstrap PR after verification.
+- Full inference synchronization completed with the documented exclusions and
+  --inexact. A second guarded sync succeeded offline, checking 52 packages.
+- uv pip check verified all 54 installed packages are compatible. The installed
+  versions below match the lock, with the documented local CUDA build overrides.
+- Local wheel provenance fingerprints were unchanged after synchronization:
+  torch 2.9.0+cu128 and torchvision 0.24.0+cu128 were not replaced.
+- Final environment diagnostics passed: CUDA tensor execution, CPU/CUDA torchvision
+  native operations, and OpenCV binary import. No pretrained models were used.
+- The final full environment also passed all 21 tests with 100% shared-core coverage,
+  Ruff lint and Ruff formatting. The separate lightweight environment passed earlier.
+
 No feature implementation, model accuracy or application performance is asserted.
 
 ## Locked dependency versions
