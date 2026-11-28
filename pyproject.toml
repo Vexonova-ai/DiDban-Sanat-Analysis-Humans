@@ -1,0 +1,30 @@
+[project]
+name = "didban-sanat-analysis-humans"
+version = "0.1.0"
+description = "A modular computer vision system for human analysis, tracking, and clothing segmentation."
+requires-python = ">=3.12,<3.13"
+dependencies = ["numpy>=2,<3", "pyyaml>=6,<7"]
+
+[project.optional-dependencies]
+inference = [
+    "torch==2.9.0", "torchvision==0.24.0", "opencv-python>=4.10,<5",
+    "ultralytics>=8.3,<9", "transformers>=4.45,<5", "pillow>=11,<13",
+]
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-cov>=6,<8", "ruff>=0.11,<1"]
+
+[tool.uv]
+package = false
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+addopts = "--cov=src.core --cov-report=term-missing --cov-fail-under=100"
+
+[tool.ruff]
+target-version = "py312"
+line-length = 100
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
